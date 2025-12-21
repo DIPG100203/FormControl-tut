@@ -10,17 +10,30 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class BasicComponent implements OnInit {
 
-  nameField = new FormControl(' primera prueba de formulario ');
+  nameField = new FormControl(' ');
+  emailField = new FormControl('')
+  phoneField = new FormControl('')
+  colorField = new FormControl('')
+  dateField = new FormControl('')
+  numberField = new FormControl('')
+
+  // selects 
+
+  categroyField = new FormControl('')
+  tagField = new FormControl('')
 
   constructor() {}
 
   ngOnInit(): void {
+    // escuchar los cambios en el valor del campo en tiempo real
     this.nameField.valueChanges
     .subscribe(value => {
       console.log(value);
     })
   }
 
+
+  // método para obtener el valor del campo al hacer clic en el botónn
   getNameValue() {
     console.log(this.nameField.value);
   }
