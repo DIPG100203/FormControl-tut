@@ -22,6 +22,17 @@ export class BasicComponent implements OnInit {
   categroyField = new FormControl('')
   tagField = new FormControl('')
 
+  //checkboxes y radios
+
+  agreedField = new FormControl(false)
+  genderField = new FormControl('')
+  zoneField = new FormControl('')
+
+  // ejercicio 1
+
+  seguroField = new FormControl(false)
+  preferenciaField = new FormControl('')
+
   constructor() {}
 
   ngOnInit(): void {

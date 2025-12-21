@@ -51,3 +51,70 @@
     </select>
 </p>
 
+<p>
+    Agreed: {{agreedField.value}}
+    <input type="checkbox" [formControl]="agreedField">
+</p>
+
+<p>
+    Gender: {{genderField.value}}
+    <label for="">
+        <input name="gender" type="radio" [formControl]="genderField" value="male">
+        Male
+    </label>
+    <label for="">
+        <input name="gender" type="radio" [formControl]="genderField" value="Female">
+        Female
+    </label>
+    <label for="">
+        <input name="gender" type="radio" [formControl]="genderField" value="Soy uno de los 32 tipos de GAYS">
+        Joto
+    </label>
+</p>
+
+<p>
+    Zone: {{zoneField.value}}
+    <label for="">
+        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-1">
+        Zona 1
+    </label>
+    <label for="">
+        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-2">
+        Zona 2
+    </label>
+    <label for="">
+        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-3">
+        Zona 3
+    </label>
+</p>
+
+<!-- EJERCICIOOOOOO 1-->
+
+<h2>Lista de preferencias</h2>
+
+<p>
+    Are you sure about to answer the question?
+</p>
+<p>
+    seguro: {{seguroField.value}}
+    <input type="checkbox" [formControl]="seguroField">
+</p>
+<p>
+    que prefieres?:
+</p>
+<p>
+    Preferencia: {{preferenciaField.value}}
+    <label for="">
+        <input type="radio" name="gusto" value="Culonas" [formControl] ="preferenciaField">
+        Culonas
+    </label>
+    <label for="">
+        <input type="radio" name="gusto" value="Tetas" [formControl] ="preferenciaField">
+        Tetas
+    </label>
+    <label for="">
+        <input type="radio" name="gusto" value="Ambas" [formControl] ="preferenciaField">
+        Ambas
+    </label>
+</p>
+
