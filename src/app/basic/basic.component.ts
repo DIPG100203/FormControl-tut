@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-basic',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './basic.component.html',
   styleUrl: './basic.component.css'
 })
 export class BasicComponent implements OnInit {
 
-  nameField = new FormControl(' ');
+  nameField = new FormControl('', [Validators.required, Validators.maxLength(10)]);
   emailField = new FormControl('')
   phoneField = new FormControl('')
   colorField = new FormControl('')

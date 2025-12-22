@@ -1,9 +1,17 @@
 <p>
     <!-- esto es un metodo para obtener el valor 
      y se muestra en pantalla -->
-    Name: {{nameField.value}}
+    Name: {{nameField.value}} {{nameField.valid}}
     <input type="text" [formControl] ="nameField">
-    <button (click)="getNameValue()">Get value</button>
+    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
+</p>
+
+<p>
+    <strong *ngIf="nameField.touched && nameField.hasError('required')">OYE WEY ESCRIBE ALGO!!!!</strong>
+</p>
+
+<p>
+    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">te pasaste wey...</strong>
 </p>
 
 <p> 
