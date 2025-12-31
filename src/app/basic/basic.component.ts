@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,21 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class BasicComponent implements OnInit {
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl(''),
-    color: new FormControl(''),
-    date: new FormControl(''),
-    number: new FormControl(''),
-
-    category: new FormControl(''),
-    tag: new FormControl(''),
-
-    agreed: new FormControl(false),
-    gender: new FormControl(''),
-    zone: new FormControl('')
-  })
+  form!: FormGroup
 
 
   // ejercicio 1
@@ -33,7 +19,11 @@ export class BasicComponent implements OnInit {
   seguroField = new FormControl(false)
   preferenciaField = new FormControl('')
 
-  constructor() {}
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.buildForm()
+  }
 
   ngOnInit(): void {
     // escuchar los cambios en el valor del campo en tiempo real
@@ -60,8 +50,26 @@ export class BasicComponent implements OnInit {
   }
 
   /* save(event: Event) {
-    console.log(this.form.value)
+    console.log(this.form.value) <-- aqui iria el codigo original
   } */
+
+  private buildForm() {
+
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(19), Validators.pattern('[a-zA-Z ]*')]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      color: ['#000000'],
+      date: [''],
+      number: [0, [Validators.required, Validators.min(18), Validators.max(100)]],
+      category: [''],
+      tag: [''],
+
+      agreed: [false, Validators.requiredTrue],
+      gender: [''],
+      zone: ['']
+    })
+  }
  
 
   get nameField() {
@@ -124,6 +132,10 @@ export class BasicComponent implements OnInit {
 
   get isEmailFieldInvalid() {
     return this.emailField.touched && this.emailField.invalid
+  }
+
+  get isPhoneFieldValid() {
+    return this
   }
 
 }

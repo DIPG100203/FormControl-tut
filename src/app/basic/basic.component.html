@@ -28,6 +28,11 @@
         >te pasaste wey...</strong
     >
     </p>
+    <p>
+      <strong *ngIf="nameField.hasError('pattern')"
+      >SOLO LETRAS WEY!! ESTAS BABOSO??
+    </strong>
+    </p>
 </div>
 
 <p>
@@ -38,7 +43,7 @@
    type="email" formControlName="email" />
 </p>
 
-<div class="messages" [class.activate] = "isEmailFieldInvalid">
+<div class="messages" [class.activate] = "emailField.touched && emailField.invalid">
     <p>
     <strong *ngIf="emailField.touched && emailField.hasError('required')"
         >OYE WEY ESCRIBE ALGO!!!!</strong
@@ -58,6 +63,14 @@
   <input type="tel" formControlName="phone" />
 </p>
 
+<div class="messages" [class.activate] ="phoneField.touched && phoneField.invalid">
+    <p>
+    <strong *ngIf="phoneField.touched && phoneField.hasError('required')"
+        >OYE WEY ESCRIBE ALGO!!!!</strong
+    >
+    </p>
+</div>
+
 <p>
   Color: {{ colorField.value }}
   <input type="color" formControlName="color" />
@@ -72,6 +85,25 @@
   Number: {{ numberField.value }}
   <input type="number" formControlName="number" />
 </p>
+
+<div class="messages" [class.activate] ="numberField.invalid && numberField.touched">
+    <p>
+    <strong *ngIf="numberField.hasError('required')"
+        >OYE WEY ESCRIBE ALGO!!!!</strong
+    >
+    </p>
+
+    <p>
+    <strong *ngIf="numberField.hasError('min')"
+        >tu no pagas impuestos...</strong
+    >
+    </p>
+    <p>
+    <strong *ngIf="numberField.hasError('max')"
+        >como es que sigues vivo?</strong
+    >
+    </p>
+</div>
 
 <p>
   Category: {{ categoryField.value }}
