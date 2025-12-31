@@ -1,128 +1,193 @@
+<form action="" [formGroup]="form" (ngSubmit)="save($event)">
+
+
 <p>
-    <!-- esto es un metodo para obtener el valor 
+  <!-- esto es un metodo para obtener el valor 
      y se muestra en pantalla -->
-    Name: {{nameField.value}} {{nameField.valid}}
-    <input type="text" [formControl] ="nameField">
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
+  Name: {{ nameField.valid }}
+  <input
+    [class.is-valid]="isNameFieldValid"
+    [class.is-invalid]="isNameFieldInvalid"
+    type="text"
+    formControlName="name"
+  />
+  <button [disabled]="nameField.invalid" (click)="getNameValue()">
+    Get value
+  </button>
+</p>
+
+<div class="messages" [class.activate] ="isNameFieldInvalid">
+    <p>
+    <strong *ngIf="nameField.touched && nameField.hasError('required')"
+        >OYE WEY ESCRIBE ALGO!!!!</strong
+    >
+    </p>
+
+    <p>
+    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
+        >te pasaste wey...</strong
+    >
+    </p>
+</div>
+
+<p>
+  Email: {{ emailField.value }}
+  <input
+  [class.is-valid]="isEmailFieldValid"
+  [class.is-invalid]="isEmailFieldInvalid"
+   type="email" formControlName="email" />
+</p>
+
+<div class="messages" [class.activate] = "isEmailFieldInvalid">
+    <p>
+    <strong *ngIf="emailField.touched && emailField.hasError('required')"
+        >OYE WEY ESCRIBE ALGO!!!!</strong
+    >
+    </p>
+
+    <p>
+    <strong *ngIf="emailField.touched && emailField.hasError('email')"
+        >Eso no es un correo wey...</strong
+    >
+    </p>
+    
+</div>
+
+<p>
+  Phone: {{ phoneField.value }}
+  <input type="tel" formControlName="phone" />
 </p>
 
 <p>
-    <strong *ngIf="nameField.touched && nameField.hasError('required')">OYE WEY ESCRIBE ALGO!!!!</strong>
+  Color: {{ colorField.value }}
+  <input type="color" formControlName="color" />
 </p>
 
 <p>
-    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">te pasaste wey...</strong>
-</p>
-
-<p> 
-    Email: {{emailField.value}}
-    <input type="email" [formControl]="emailField">
+  Date: {{ dateField.value }}
+  <input type="date" formControlName="date" />
 </p>
 
 <p>
-    Phone: {{phoneField.value}}
-    <input type="tel" [formControl]="phoneField">
+  Number: {{ numberField.value }}
+  <input type="number" formControlName="number" />
 </p>
 
 <p>
-    Color: {{colorField.value}}
-    <input type="color" [formControl]="colorField">
+  Category: {{ categoryField.value }}
+  <select formControlName="category">
+    <option value="category-1">category 1</option>
+    <option value="category-2">category 2</option>
+    <option value="category-3">category 3</option>
+    <option value="category-4">category 4</option>
+  </select>
 </p>
 
 <p>
-    Date: {{dateField.value}}
-    <input type="date" [formControl]="dateField">
+  Tags: {{ tagField.value }}
+  <select formControlName="tag" multiple>
+    <option value="tag-1">tag 1</option>
+    <option value="tag-2">tag 2</option>
+    <option value="tag-3">tag 3</option>
+    <option value="tag-4">tag 4</option>
+  </select>
 </p>
 
 <p>
-    Number: {{numberField.value}}
-    <input type="number" [formControl]="numberField">
+  Agreed: {{ agreedField.value }}
+  <input type="checkbox" formControlName="agreed" />
 </p>
 
 <p>
-    Category: {{categroyField.value}}
-    <select [formControl]="categroyField">
-        <option value="category-1">category 1</option>
-        <option value="category-2">category 2</option>
-        <option value="category-3">category 3</option>
-        <option value="category-4">category 4</option>
-    </select>
+  Gender: {{ genderField.value }}
+  <label for="">
+    <input
+      name="gender"
+      type="radio"
+      formControlName="gender"
+      value="male"
+    />
+    Male
+  </label>
+  <label for="">
+    <input
+      name="gender"
+      type="radio"
+      formControlName="gender"
+      value="Female"
+    />
+    Female
+  </label>
+  <label for="">
+    <input
+      name="gender"
+      type="radio"
+      formControlName="gender"
+      value="Soy uno de los 32 tipos de GAYS"
+    />
+    Joto
+  </label>
 </p>
 
 <p>
-    Tags: {{tagField.value}}
-    <select [formControl] ="tagField" multiple>
-        <option value="tag-1">tag 1</option>
-        <option value="tag-2">tag 2</option>
-        <option value="tag-3">tag 3</option>
-        <option value="tag-4">tag 4</option>
-    </select>
-</p>
-
-<p>
-    Agreed: {{agreedField.value}}
-    <input type="checkbox" [formControl]="agreedField">
-</p>
-
-<p>
-    Gender: {{genderField.value}}
-    <label for="">
-        <input name="gender" type="radio" [formControl]="genderField" value="male">
-        Male
-    </label>
-    <label for="">
-        <input name="gender" type="radio" [formControl]="genderField" value="Female">
-        Female
-    </label>
-    <label for="">
-        <input name="gender" type="radio" [formControl]="genderField" value="Soy uno de los 32 tipos de GAYS">
-        Joto
-    </label>
-</p>
-
-<p>
-    Zone: {{zoneField.value}}
-    <label for="">
-        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-1">
-        Zona 1
-    </label>
-    <label for="">
-        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-2">
-        Zona 2
-    </label>
-    <label for="">
-        <input name="zone" type="radio" [formControl]="zoneField" value="Zone-3">
-        Zona 3
-    </label>
+  Zone: {{ zoneField.value }}
+  <label for="">
+    <input name="zone" type="radio" formControlName="zone" value="Zone-1" />
+    Zona 1
+  </label>
+  <label for="">
+    <input name="zone" type="radio" formControlName="zone" value="Zone-2" />
+    Zona 2
+  </label>
+  <label for="">
+    <input name="zone" type="radio" formControlName="zone" value="Zone-3" />
+    Zona 3
+  </label>
 </p>
 
 <!-- EJERCICIOOOOOO 1-->
 
 <h2>Lista de preferencias</h2>
 
+<p>Are you sure about to answer the question?</p>
 <p>
-    Are you sure about to answer the question?
+  seguro: {{ seguroField.value }}
+  <input type="checkbox" [formControl]="seguroField" />
 </p>
+<p>que prefieres?:</p>
 <p>
-    seguro: {{seguroField.value}}
-    <input type="checkbox" [formControl]="seguroField">
-</p>
-<p>
-    que prefieres?:
-</p>
-<p>
-    Preferencia: {{preferenciaField.value}}
-    <label for="">
-        <input type="radio" name="gusto" value="Culonas" [formControl] ="preferenciaField">
-        Culonas
-    </label>
-    <label for="">
-        <input type="radio" name="gusto" value="Tetas" [formControl] ="preferenciaField">
-        Tetas
-    </label>
-    <label for="">
-        <input type="radio" name="gusto" value="Ambas" [formControl] ="preferenciaField">
-        Ambas
-    </label>
+  Preferencia: {{ preferenciaField.value }}
+  <label for="">
+    <input
+      type="radio"
+      name="gusto"
+      value="Culonas"
+      [formControl]="preferenciaField"
+    />
+    Culonas
+  </label>
+  <label for="">
+    <input
+      type="radio"
+      name="gusto"
+      value="Tetas"
+      [formControl]="preferenciaField"
+    />
+    Tetas
+  </label>
+  <label for="">
+    <input
+      type="radio"
+      name="gusto"
+      value="Ambas"
+      [formControl]="preferenciaField"
+    />
+    Ambas
+  </label>
 </p>
 
+<p>
+  <button type="submit">Enviar</button>
+</p>
+
+</form>
