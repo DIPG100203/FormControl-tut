@@ -1,225 +1,179 @@
 <form action="" [formGroup]="form" (ngSubmit)="save($event)">
+  <div formGroupName="fullName">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name: {{ nameField.valid }}</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-icon matSuffix *ngIf="isNameFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+      <mat-error *ngIf="nameField.hasError('required')">
+        OYE WEY ESCRIBE ALGO!!!!
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('maxlength')">
+        te pasaste wey... maximo 10 caracteres
+      </mat-error>
+      <mat-error *ngIf="nameField.hasError('pattern')">
+        SOLO LETRAS WEY!! ESTAS BABOSO??
+      </mat-error>
+    </mat-form-field>
 
+    <!--     <div class="messages" [class.activate]="isNameFieldInvalid">
+    </div> -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Last Name: {{ lastNameField.valid }}</mat-label>
+      <input matInput type="text" formControlName="lastName" />
+      <mat-icon matSuffix>done</mat-icon>
+    </mat-form-field>
+  </div>
 
-<p>
-  <!-- esto es un metodo para obtener el valor 
-     y se muestra en pantalla -->
-  Name: {{ nameField.valid }}
-  <input
-    [class.is-valid]="isNameFieldValid"
-    [class.is-invalid]="isNameFieldInvalid"
-    type="text"
-    formControlName="name"
-  />
-  <button [disabled]="nameField.invalid" (click)="getNameValue()">
-    Get value
-  </button>
-</p>
-
-<div class="messages" [class.activate] ="isNameFieldInvalid">
-    <p>
-    <strong *ngIf="nameField.touched && nameField.hasError('required')"
-        >OYE WEY ESCRIBE ALGO!!!!</strong
-    >
-    </p>
-
-    <p>
-    <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
-        >te pasaste wey...</strong
-    >
-    </p>
-    <p>
-      <strong *ngIf="nameField.hasError('pattern')"
-      >SOLO LETRAS WEY!! ESTAS BABOSO??
-    </strong>
-    </p>
-</div>
-
-<p>
-  Email: {{ emailField.value }}
-  <input
-  [class.is-valid]="isEmailFieldValid"
-  [class.is-invalid]="isEmailFieldInvalid"
-   type="email" formControlName="email" />
-</p>
-
-<div class="messages" [class.activate] = "emailField.touched && emailField.invalid">
-    <p>
-    <strong *ngIf="emailField.touched && emailField.hasError('required')"
-        >OYE WEY ESCRIBE ALGO!!!!</strong
-    >
-    </p>
-
-    <p>
-    <strong *ngIf="emailField.touched && emailField.hasError('email')"
-        >Eso no es un correo wey...</strong
-    >
-    </p>
-    
-</div>
-
-<p>
-  Phone: {{ phoneField.value }}
-  <input type="tel" formControlName="phone" />
-</p>
-
-<div class="messages" [class.activate] ="phoneField.touched && phoneField.invalid">
-    <p>
-    <strong *ngIf="phoneField.touched && phoneField.hasError('required')"
-        >OYE WEY ESCRIBE ALGO!!!!</strong
-    >
-    </p>
-</div>
-
-<p>
-  Color: {{ colorField.value }}
-  <input type="color" formControlName="color" />
-</p>
-
-<p>
-  Date: {{ dateField.value }}
-  <input type="date" formControlName="date" />
-</p>
-
-<p>
-  Number: {{ numberField.value }}
-  <input type="number" formControlName="number" />
-</p>
-
-<div class="messages" [class.activate] ="numberField.invalid && numberField.touched">
-    <p>
-    <strong *ngIf="numberField.hasError('required')"
-        >OYE WEY ESCRIBE ALGO!!!!</strong
-    >
-    </p>
-
-    <p>
-    <strong *ngIf="numberField.hasError('min')"
-        >tu no pagas impuestos...</strong
-    >
-    </p>
-    <p>
-    <strong *ngIf="numberField.hasError('max')"
-        >como es que sigues vivo?</strong
-    >
-    </p>
-</div>
-
-<p>
-  Category: {{ categoryField.value }}
-  <select formControlName="category">
-    <option value="category-1">category 1</option>
-    <option value="category-2">category 2</option>
-    <option value="category-3">category 3</option>
-    <option value="category-4">category 4</option>
-  </select>
-</p>
-
-<p>
-  Tags: {{ tagField.value }}
-  <select formControlName="tag" multiple>
-    <option value="tag-1">tag 1</option>
-    <option value="tag-2">tag 2</option>
-    <option value="tag-3">tag 3</option>
-    <option value="tag-4">tag 4</option>
-  </select>
-</p>
-
-<p>
-  Agreed: {{ agreedField.value }}
-  <input type="checkbox" formControlName="agreed" />
-</p>
-
-<p>
-  Gender: {{ genderField.value }}
-  <label for="">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email: {{ emailField.valid }}</mat-label>
     <input
-      name="gender"
-      type="radio"
-      formControlName="gender"
-      value="male"
+      matInput
+      placeholder="algo@gmail.com"
+      type="email"
+      formControlName="email"
     />
-    Male
-  </label>
-  <label for="">
-    <input
-      name="gender"
-      type="radio"
-      formControlName="gender"
-      value="Female"
-    />
-    Female
-  </label>
-  <label for="">
-    <input
-      name="gender"
-      type="radio"
-      formControlName="gender"
-      value="Soy uno de los 32 tipos de GAYS"
-    />
-    Joto
-  </label>
-</p>
+    <mat-icon matSuffix *ngIf="isEmailFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isEmailFieldInvalid">close</mat-icon>
+    <mat-error *ngIf="emailField.hasError('required')">
+      OYE WEY ESCRIBE ALGO!!!!
+    </mat-error>
+    <mat-error *ngIf="emailField.hasError('email')">
+      Eso no es un correo wey...
+    </mat-error>
+  </mat-form-field>
 
-<p>
-  Zone: {{ zoneField.value }}
-  <label for="">
-    <input name="zone" type="radio" formControlName="zone" value="Zone-1" />
-    Zona 1
-  </label>
-  <label for="">
-    <input name="zone" type="radio" formControlName="zone" value="Zone-2" />
-    Zona 2
-  </label>
-  <label for="">
-    <input name="zone" type="radio" formControlName="zone" value="Zone-3" />
-    Zona 3
-  </label>
-</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Tel: {{ phoneField.valid }}</mat-label>
+    <input matInput type="tel" placeholder="0" formControlName="phone" />
+    <mat-icon matSuffix *ngIf="isPhoneFieldValid">done</mat-icon>
+    <mat-icon matSuffix *ngIf="isPhoneFieldInvalid">close</mat-icon>
+    <mat-error *ngIf="phoneField.hasError('required')">
+      OYE WEY ESCRIBE ALGO!!!!
+    </mat-error>
+  </mat-form-field>
 
-<!-- EJERCICIOOOOOO 1-->
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Color: {{ colorField.value }}</mat-label>
+      <input matInput type="color" formControlName="color" />
+    </mat-form-field>
 
-<h2>Lista de preferencias</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Chosse a Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        type="date"
+        formControlName="date"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-<p>Are you sure about to answer the question?</p>
-<p>
-  seguro: {{ seguroField.value }}
-  <input type="checkbox" [formControl]="seguroField" />
-</p>
-<p>que prefieres?:</p>
-<p>
-  Preferencia: {{ preferenciaField.value }}
-  <label for="">
-    <input
-      type="radio"
-      name="gusto"
-      value="Culonas"
-      [formControl]="preferenciaField"
-    />
-    Culonas
-  </label>
-  <label for="">
-    <input
-      type="radio"
-      name="gusto"
-      value="Tetas"
-      [formControl]="preferenciaField"
-    />
-    Tetas
-  </label>
-  <label for="">
-    <input
-      type="radio"
-      name="gusto"
-      value="Ambas"
-      [formControl]="preferenciaField"
-    />
-    Ambas
-  </label>
-</p>
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Number: {{ numberField.value }}</mat-label>
+      <input matInput type="number" formControlName="number" placeholder="0" />
+      <mat-icon matSuffix *ngIf="isNumberFieldValid">done</mat-icon>
+      <mat-icon matSuffix *ngIf="isNumberFieldInvalid">close</mat-icon>
+      <mat-error *ngIf="numberField.hasError('required')">
+        OYE WEY ESCRIBE ALGO!!!!
+      </mat-error>
+      <mat-error *ngIf="numberField.hasError('min')">
+        tu no pagas impuestos...
+      </mat-error>
+      <mat-error *ngIf="numberField.hasError('max')">
+        como es que sigues vivo?
+      </mat-error>
+    </mat-form-field>
 
-<p>
-  <button type="submit">Enviar</button>
-</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Category: {{ categoryField.value }}</mat-label>
+      <mat-select formControlName="category">
+        <mat-option value="category-1">category 1</mat-option>
+        <mat-option value="category-2">category 2</mat-option>
+        <mat-option value="category-3">category 3</mat-option>
+        <mat-option value="category-4">category 4</mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Tags: {{ tagField.value }}</mat-label>
+      <mat-select formControlName="tag" multiple>
+        <mat-option value="tag-1">tag 1</mat-option>
+        <mat-option value="tag-2">tag 2</mat-option>
+        <mat-option value="tag-3">tag 3</mat-option>
+        <mat-option value="tag-4">tag 4</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-label>Agreed: {{ agreedField.value }}</mat-label>
+  <mat-checkbox formControlName="agreed">I Agree</mat-checkbox>
+  <br /><br />
+
+  <mat-label>Gender: {{ genderField.value }}</mat-label>
+  <mat-radio-group formControlName="gender">
+    <mat-radio-button value="male">Male</mat-radio-button>
+    <mat-radio-button value="Female">Female</mat-radio-button>
+    <mat-radio-button value="Soy uno de los 32 tipos de GAYS"
+      >Joto</mat-radio-button
+    >
+  </mat-radio-group>
+
+  <br /><br />
+  <mat-label>Zone: {{ zoneField.value }}</mat-label>
+  <mat-radio-group formControlName="zone">
+    <mat-radio-button value="Zone-1">Zona 1</mat-radio-button>
+    <mat-radio-button value="Zone-2">Zona 2</mat-radio-button>
+    <mat-radio-button value="Zone-3">Zona 3</mat-radio-button>
+  </mat-radio-group>
+
+  <!-- EJERCICIOOOOOO 1-->
+
+  <h2>Lista de preferencias</h2>
+
+  <p>Are you sure about to answer the question?</p>
+  <p>
+    seguro: {{ seguroField.value }}
+    <input type="checkbox" [formControl]="seguroField" />
+  </p>
+  <p>que prefieres?:</p>
+  <p>
+    Preferencia: {{ preferenciaField.value }}
+    <label for="">
+      <input
+        type="radio"
+        name="gusto"
+        value="Culonas"
+        [formControl]="preferenciaField"
+      />
+      Culonas
+    </label>
+    <label for="">
+      <input
+        type="radio"
+        name="gusto"
+        value="Tetas"
+        [formControl]="preferenciaField"
+      />
+      Tetas
+    </label>
+    <label for="">
+      <input
+        type="radio"
+        name="gusto"
+        value="Ambas"
+        [formControl]="preferenciaField"
+      />
+      Ambas
+    </label>
+  </p>
+
+  <p>
+    <button type="submit">Enviar</button>
+  </p>
 </form>
