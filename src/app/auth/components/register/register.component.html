@@ -1,0 +1,81 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registro</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="email"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="password"
+          formControlName="password"
+        />
+        <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+          <mat-error *ngIf="form.get('password')?.hasError('invalid_password')">
+            Debe tener 1 numero
+          </mat-error>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="confirm password"
+          formControlName="confirmPassword"
+        />
+        <div *ngIf="form.get('confirmPassword')?.touched && form.errors">
+          <mat-error *ngIf="form.hasError('match_passwords')">
+            Las contraseñas no coinciden
+          </mat-error>
+        </div>
+      </mat-form-field>
+      <div>
+        <div>
+          <mat-radio-group formControlName="type" aria-label="select an option">
+            <mat-radio-button value="company">Company</mat-radio-button>
+            <mat-radio-button value="customer">Customer</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div>
+        <div>
+          <mat-form-field appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="company name"
+          formControlName="companyName"
+        />
+      </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Registro
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
