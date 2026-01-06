@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { CategoriesService } from '../../../../services/categories.service';
 
 @Component({
   selector: 'app-category-form',
@@ -26,7 +27,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
     MatInputModule,
     MatButtonModule,
     MatRadioButton,
-    MatRadioGroup
+    MatRadioGroup,
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.css',
@@ -34,7 +35,11 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 export class CategoryFormComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private catSer: CategoriesService,
+    //private rt: Router
+  ) {
     this.buildForm();
   }
 
@@ -53,5 +58,23 @@ export class CategoryFormComponent implements OnInit {
 
   get imageField() {
     return this.form.get('image');
+  }
+
+  save() {
+    if (this.form.valid) {
+      this.createCategory();
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+  private createCategory() {
+    const data = this.form.value;
+    this.catSer.createCategory(data).subscribe(rta => {
+      console.log(rta)
+      /* valio madres no se como funciona el router
+      this.router.navigate(['./admin/categories'])
+      */
+    });
   }
 }
